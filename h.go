@@ -1,3 +1,5 @@
+// Package provides a psuedo-DOM style approach to generating HTML markup.
+// **Unstable API. Work in progress.**
 package h
 
 import (
