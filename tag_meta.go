@@ -7,7 +7,7 @@ type Meta struct {
 	Content  string
 }
 
-func (m *Meta) HTML() HTML {
+func (m *Meta) HTML() (HTML, error) {
 	attrs := Attributes{}
 	if m.Charset != "" {
 		attrs["charset"] = m.Charset
@@ -25,5 +25,5 @@ func (m *Meta) HTML() HTML {
 		Tag:         "meta",
 		Attributes:  attrs,
 		SelfClosing: true,
-	}
+	}, nil
 }

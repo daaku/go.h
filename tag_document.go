@@ -16,10 +16,10 @@ func (ns XMLNS) Attributes() Attributes {
 	return attrs
 }
 
-func (d *Document) HTML() HTML {
+func (d *Document) HTML() (HTML, error) {
 	return &Node{
 		Tag:        "html",
 		Attributes: d.XMLNS.Attributes(),
 		Inner:      &Frag{d.Head, d.Body},
-	}
+	}, nil
 }

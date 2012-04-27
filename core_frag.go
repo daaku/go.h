@@ -1,15 +1,14 @@
 package h
 
 import (
+	"fmt"
 	"io"
-	"log"
 )
 
 type Frag []HTML
 
-func (f *Frag) HTML() HTML {
-	log.Fatalf("Frag.HTML called for %s", f)
-	return f
+func (f *Frag) HTML() (HTML, error) {
+	return f, fmt.Errorf("Frag.HTML called for %s", f)
 }
 
 func (f *Frag) Append(h HTML) {

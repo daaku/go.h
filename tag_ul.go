@@ -8,9 +8,9 @@ type Ul struct {
 	Inner HTML
 }
 
-func (ul *Ul) HTML() HTML {
+func (ul *Ul) HTML() (HTML, error) {
 	return &Node{
 		Tag:   "ul",
 		Inner: ul.Inner,
-	}
+	}, nil
 }

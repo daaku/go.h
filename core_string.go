@@ -6,6 +6,6 @@ import (
 
 type String string
 
-func (s String) HTML() HTML {
-	return Unsafe(html.EscapeString(string(s)))
+func (s String) HTML() (HTML, error) {
+	return Unsafe(html.EscapeString(string(s))), nil
 }

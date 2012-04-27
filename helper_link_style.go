@@ -1,13 +1,13 @@
 package h
 
-type LinkedStyle struct {
+type LinkStyle struct {
 	HREF string
 }
 
-func (l *LinkedStyle) HTML() HTML {
+func (l *LinkStyle) HTML() (HTML, error) {
 	return &Link{
 		Type: "text/css",
 		Rel:  "stylesheet",
 		HREF: l.HREF,
-	}
+	}, nil
 }

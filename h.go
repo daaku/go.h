@@ -7,7 +7,7 @@ import (
 )
 
 type HTML interface {
-	HTML() HTML
+	HTML() (HTML, error)
 }
 
 type Primitive interface {
@@ -16,6 +16,7 @@ type Primitive interface {
 
 // Write HTML into a writer.
 func Write(w io.Writer, h HTML) (int, error) {
+	var err error
 	for {
 		switch t := h.(type) {
 		case nil:
@@ -23,7 +24,10 @@ func Write(w io.Writer, h HTML) (int, error) {
 		case Primitive:
 			return t.Write(w)
 		case HTML:
-			h = h.HTML()
+			h, err = h.HTML()
+			if err != nil {
+				return 0, err
+			}
 		default:
 			return 0, fmt.Errorf("Value %+v of unknown type %T", h, h)
 		}

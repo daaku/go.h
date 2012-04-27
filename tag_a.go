@@ -9,9 +9,9 @@ type A struct {
 	Inner HTML
 }
 
-func (a *A) HTML() HTML {
+func (a *A) HTML() (HTML, error) {
 	return &Node{
 		Tag:   "a",
 		Inner: a.Inner,
-	}
+	}, nil
 }

@@ -3,7 +3,6 @@ package h
 import (
 	"fmt"
 	"io"
-	"log"
 )
 
 type Node struct {
@@ -13,9 +12,8 @@ type Node struct {
 	SelfClosing bool
 }
 
-func (n *Node) HTML() HTML {
-	log.Fatalf("Called HTML for Node: %+v", n)
-	return n
+func (n *Node) HTML() (HTML, error) {
+	return n, fmt.Errorf("Called HTML for Node: %+v", n)
 }
 
 // Write the generated markup for a Node.

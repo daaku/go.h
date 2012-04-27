@@ -8,8 +8,8 @@ type Body struct {
 	Inner HTML
 }
 
-func (b *Body) HTML() HTML {
+func (b *Body) HTML() (HTML, error) {
 	return &Node{
 		Tag: "body",
-	}
+	}, nil
 }

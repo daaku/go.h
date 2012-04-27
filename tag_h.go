@@ -8,9 +8,9 @@ type H1 struct {
 	Inner HTML
 }
 
-func (h *H1) HTML() HTML {
+func (h *H1) HTML() (HTML, error) {
 	return &Node{
 		Tag:   "h1",
 		Inner: h.Inner,
-	}
+	}, nil
 }
