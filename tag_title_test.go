@@ -6,6 +6,6 @@ import (
 
 func TestEmptyTitle(t *testing.T) {
 	t.Parallel()
-	title := Title("")
+	title := &Title{String("")}
 	assertRender(t, title, `<title></title>`)
 }

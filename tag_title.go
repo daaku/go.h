@@ -1,10 +1,11 @@
 package h
 
-type Title string
+type Title Frag
 
-func (t Title) HTML() (HTML, error) {
+func (t *Title) HTML() (HTML, error) {
+	f := Frag(*t)
 	return &Node{
 		Tag:   "title",
-		Inner: String(t),
+		Inner: &f,
 	}, nil
 }
