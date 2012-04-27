@@ -10,8 +10,19 @@ type A struct {
 }
 
 func (a *A) HTML() (HTML, error) {
+	attrs := Attributes{}
+	if a.ID != "" {
+		attrs["id"] = a.ID
+	}
+	if a.Class != "" {
+		attrs["class"] = a.Class
+	}
+	if a.Style != "" {
+		attrs["style"] = a.Style
+	}
 	return &Node{
 		Tag:   "a",
+		Attributes: attrs,
 		Inner: a.Inner,
 	}, nil
 }
