@@ -7,7 +7,7 @@ import (
 func TestEmptyDocument(t *testing.T) {
 	t.Parallel()
 	doc := &Document{}
-	assertRender(t, doc, `<html></html>`)
+	assertRender(t, doc, `<!doctype html><html></html>`)
 }
 
 func TestFacebookXMLNS(t *testing.T) {
@@ -17,5 +17,6 @@ func TestFacebookXMLNS(t *testing.T) {
 			"fb": "http://ogp.me/ns/fb#",
 		},
 	}
-	assertRender(t, doc, `<html xmlns:fb="http://ogp.me/ns/fb#"></html>`)
+	assertRender(t, doc,
+		`<!doctype html><html xmlns:fb="http://ogp.me/ns/fb#"></html>`)
 }

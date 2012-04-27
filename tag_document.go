@@ -17,9 +17,12 @@ func (ns XMLNS) Attributes() Attributes {
 }
 
 func (d *Document) HTML() (HTML, error) {
-	return &Node{
-		Tag:        "html",
-		Attributes: d.XMLNS.Attributes(),
-		Inner:      &Frag{d.Head, d.Body},
+	return &Frag{
+		Unsafe("<!doctype html>"),
+		&Node{
+			Tag:        "html",
+			Attributes: d.XMLNS.Attributes(),
+			Inner:      &Frag{d.Head, d.Body},
+		},
 	}, nil
 }
