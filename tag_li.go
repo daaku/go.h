@@ -1,16 +1,13 @@
 package h
 
 type Li struct {
-	ID    string
-	Class string
-	Style string
-	Title string
-	Inner HTML
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Title string `h:"attr"`
+	Inner HTML   `h:"inner"`
 }
 
 func (l *Li) HTML() (HTML, error) {
-	return &Node{
-		Tag:   "li",
-		Inner: l.Inner,
-	}, nil
+	return &ReflectNode{Tag: "li", Node: l}, nil
 }

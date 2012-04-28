@@ -1,26 +1,12 @@
 package h
 
 type Span struct {
-	ID    string
-	Class string
-	Style string
-	Inner HTML
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Inner HTML   `h:"inner"`
 }
 
 func (s *Span) HTML() (HTML, error) {
-	attrs := Attributes{}
-	if s.ID != "" {
-		attrs["id"] = s.ID
-	}
-	if s.Class != "" {
-		attrs["class"] = s.Class
-	}
-	if s.Style != "" {
-		attrs["style"] = s.Style
-	}
-	return &Node{
-		Tag:   "span",
-		Attributes: attrs,
-		Inner: s.Inner,
-	}, nil
+	return &ReflectNode{Tag: "span", Node: s}, nil
 }

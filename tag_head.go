@@ -1,12 +1,9 @@
 package h
 
 type Head struct {
-	Inner HTML
+	Inner HTML `h:"inner"`
 }
 
 func (h *Head) HTML() (HTML, error) {
-	return &Node{
-		Tag:   "head",
-		Inner: h.Inner,
-	}, nil
+	return &ReflectNode{Tag: "head", Node: h}, nil
 }

@@ -1,25 +1,11 @@
 package h
 
 type Link struct {
-	Type string
-	Rel  string
-	HREF string
+	Type string `h:"attr"`
+	Rel  string `h:"attr"`
+	HREF string `h:"attr"`
 }
 
 func (l *Link) HTML() (HTML, error) {
-	attrs := Attributes{}
-	if l.Type != "" {
-		attrs["type"] = l.Type
-	}
-	if l.Rel != "" {
-		attrs["rel"] = l.Rel
-	}
-	if l.HREF != "" {
-		attrs["href"] = l.HREF
-	}
-	return &Node{
-		Tag:         "link",
-		Attributes:  attrs,
-		SelfClosing: true,
-	}, nil
+	return &ReflectNode{"link", l, true}, nil
 }

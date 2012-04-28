@@ -1,28 +1,14 @@
 package h
 
 type A struct {
-	ID    string
-	Class string
-	Style string
-	Title string
-	HREF  string
-	Inner HTML
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Title string `h:"attr"`
+	HREF  string `h:"attr"`
+	Inner HTML   `h:"inner"`
 }
 
 func (a *A) HTML() (HTML, error) {
-	attrs := Attributes{}
-	if a.ID != "" {
-		attrs["id"] = a.ID
-	}
-	if a.Class != "" {
-		attrs["class"] = a.Class
-	}
-	if a.Style != "" {
-		attrs["style"] = a.Style
-	}
-	return &Node{
-		Tag:   "a",
-		Attributes: attrs,
-		Inner: a.Inner,
-	}, nil
+	return &ReflectNode{Tag: "a", Node: a}, nil
 }

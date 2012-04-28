@@ -32,6 +32,27 @@ func writeValue(w io.Writer, i interface{}) (int, error) {
 	return fmt.Fprint(w, html.EscapeString(res))
 }
 
+// Check if a value is empty.
+func isZero(i interface{}) (bool, error) {
+	value := reflect.ValueOf(i)
+	switch value.Kind() {
+	case reflect.Bool:
+		return value.Bool() == false, nil
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return value.Int() == 0, nil
+	case reflect.Float32, reflect.Float64:
+		return value.Float() == 0, nil
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+		return value.Uint() == 0, nil
+	case reflect.String:
+		return value.String() == "", nil
+	default:
+		return false, fmt.Errorf(
+			`Could not work with attribute value "%v" with kind %s`, i, value.Kind())
+	}
+	panic("never reached")
+}
+
 // Render attributes with using the optional key prefix.
 func (attrs Attributes) Write(w io.Writer, prefix string) (int, error) {
 	written := 0
