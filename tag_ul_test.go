@@ -1,11 +1,12 @@
-package h
+package h_test
 
 import (
+	"github.com/nshah/go.h"
 	"testing"
 )
 
 func TestEmptyUl(t *testing.T) {
 	t.Parallel()
-	ul := &Ul{}
+	ul := &h.Ul{}
 	assertRender(t, ul, `<ul></ul>`)
 }

@@ -1,11 +1,12 @@
-package h
+package h_test
 
 import (
+	"github.com/nshah/go.h"
 	"testing"
 )
 
 func TestEmptyMeta(t *testing.T) {
 	t.Parallel()
-	meta := &Meta{}
+	meta := &h.Meta{}
 	assertRender(t, meta, `<meta>`)
 }

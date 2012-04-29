@@ -1,19 +1,20 @@
-package h
+package h_test
 
 import (
+	"github.com/nshah/go.h"
 	"testing"
 )
 
 func TestEmptyDocument(t *testing.T) {
 	t.Parallel()
-	doc := &Document{}
+	doc := &h.Document{}
 	assertRender(t, doc, `<!doctype html><html></html>`)
 }
 
 func TestFacebookXMLNS(t *testing.T) {
 	t.Parallel()
-	doc := &Document{
-		XMLNS: XMLNS{
+	doc := &h.Document{
+		XMLNS: h.XMLNS{
 			"fb": "http://ogp.me/ns/fb#",
 		},
 	}

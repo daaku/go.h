@@ -1,11 +1,18 @@
-package h
+package h_test
 
 import (
+	"github.com/nshah/go.h"
 	"testing"
 )
 
 func TestEmptyA(t *testing.T) {
 	t.Parallel()
-	a := &A{}
+	a := &h.A{}
 	assertRender(t, a, `<a></a>`)
+}
+
+func TestWithHREF(t *testing.T) {
+	t.Parallel()
+	a := &h.A{HREF: "/"}
+	assertRender(t, a, `<a href="/"></a>`)
 }
