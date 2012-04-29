@@ -4,8 +4,7 @@ type XMLNS map[string]string
 
 type Document struct {
 	XMLNS XMLNS
-	Head  HTML
-	Body  HTML
+	Inner HTML
 }
 
 func (ns XMLNS) Attributes() Attributes {
@@ -22,7 +21,7 @@ func (d *Document) HTML() (HTML, error) {
 		&Node{
 			Tag:        "html",
 			Attributes: d.XMLNS.Attributes(),
-			Inner:      &Frag{d.Head, d.Body},
+			Inner:      d.Inner,
 		},
 	}, nil
 }
