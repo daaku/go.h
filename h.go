@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"log"
 )
 
 type HTML interface {
@@ -42,4 +43,13 @@ func Render(h HTML) (string, error) {
 	buffer := bytes.NewBufferString("")
 	_, err := Write(buffer, h)
 	return buffer.String(), err
+}
+
+// Compile static HTML into HTML. Will panic if there are errors.
+func Compile(h HTML) HTML {
+	m, err := Render(h)
+	if err != nil {
+		log.Fatalf("Failed to Compile HTML %v with error %s", h, err)
+	}
+	return Unsafe(m)
 }
