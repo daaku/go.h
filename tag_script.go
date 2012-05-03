@@ -1,12 +1,10 @@
 package h
 
 type Script struct {
-	Inner HTML
+	Src   string `h:"attr"`
+	Inner HTML   `h:"inner"`
 }
 
 func (s *Script) HTML() (HTML, error) {
-	return &Node{
-		Tag:   "script",
-		Inner: s.Inner,
-	}, nil
+	return &ReflectNode{Tag: "script", Node: s}, nil
 }
