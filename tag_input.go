@@ -3,7 +3,7 @@ package h
 type Input struct {
 	ID    string `h:"attr"`
 	Class string `h:"attr"`
-	Name string `h:"attr"`
+	Name  string `h:"attr"`
 	Style string `h:"attr"`
 	Type  string `h:"attr"`
 	Value string `h:"attr"`
