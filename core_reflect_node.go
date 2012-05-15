@@ -64,38 +64,30 @@ func (n *ReflectNode) writeAttributes(w io.Writer) (int, error) {
 	typeOf := value.Type()
 	written := 0
 	tmp := 0
-	skip := false
 	var err error
 	for i := 0; i < typeOf.NumField(); i++ {
 		field := typeOf.Field(i)
-		if field.Tag.Get("h") != "attr" {
-			continue
-		}
-
-		fieldValue := value.Field(i).Interface()
-		skip, err = isZero(fieldValue)
-		if err != nil {
-			return written, err
-		}
-		if skip {
-			continue
-		}
-
-		key := strings.ToLower(field.Name)
-		tmp, err = fmt.Fprintf(w, ` %s="`, key)
-		written += tmp
-		if err != nil {
-			return written, err
-		}
-		tmp, err = writeValue(w, fieldValue)
-		written += tmp
-		if err != nil {
-			return written, err
-		}
-		tmp, err = fmt.Fprint(w, `"`)
-		written += tmp
-		if err != nil {
-			return written, err
+		switch field.Tag.Get("h") {
+		case "attr":
+			tmp, err = writeKeyValue(
+				w, strings.ToLower(field.Name), value.Field(i).Interface())
+			written += tmp
+			if err != nil {
+				return written, err
+			}
+		case "dict":
+			val := value.Field(i).Interface()
+			rawAttrs, ok := val.(map[string]interface{})
+			if !ok {
+				return written, fmt.Errorf(
+					"Invalid dict2 value: %+v of type %T", val, val)
+			}
+			attrs := Attributes(rawAttrs)
+			tmp, err = attrs.Write(w, strings.ToLower(field.Name)+"-")
+			written += tmp
+			if err != nil {
+				return written, err
+			}
 		}
 	}
 	return written, nil

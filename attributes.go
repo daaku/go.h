@@ -53,23 +53,42 @@ func isZero(i interface{}) (bool, error) {
 	panic("never reached")
 }
 
+// Render a attribute value pair.
+func writeKeyValue(w io.Writer, key string, val interface{}) (int, error) {
+	var err error
+	var skip bool
+	skip, err = isZero(val)
+	if err != nil {
+		return 0, err
+	}
+	if skip {
+		return 0, nil
+	}
+	var written, i int
+	i, err = fmt.Fprintf(w, ` %s="`, key)
+	written += i
+	if err != nil {
+		return written, err
+	}
+	i, err = writeValue(w, val)
+	written += i
+	if err != nil {
+		return written, err
+	}
+	i, err = fmt.Fprint(w, `"`)
+	written += i
+	if err != nil {
+		return written, err
+	}
+	return written, nil
+}
+
 // Render attributes with using the optional key prefix.
 func (attrs Attributes) Write(w io.Writer, prefix string) (int, error) {
-	written := 0
-	i := 0
+	var written, i int
 	var err error
 	for key, val := range attrs {
-		i, err = fmt.Fprintf(w, ` %s="`, prefix+key)
-		written += i
-		if err != nil {
-			return written, err
-		}
-		i, err = writeValue(w, val)
-		written += i
-		if err != nil {
-			return written, err
-		}
-		i, err = fmt.Fprint(w, `"`)
+		i, err = writeKeyValue(w, prefix+key, val)
 		written += i
 		if err != nil {
 			return written, err

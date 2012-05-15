@@ -10,5 +10,9 @@ type Input struct {
 }
 
 func (i *Input) HTML() (HTML, error) {
-	return &ReflectNode{Tag: "input", Node: i}, nil
+	return &ReflectNode{
+		Tag:         "input",
+		Node:        i,
+		SelfClosing: true,
+	}, nil
 }
