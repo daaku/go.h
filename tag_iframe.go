@@ -1,10 +1,10 @@
 package h
 
 type Iframe struct {
-	ID                string `h:"attr"`
-	Class             string `h:"attr"`
-	Style             string `h:"attr"`
-	Src               string `h:"attr"`
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Src   string `h:"attr"`
 }
 
 func (t *Iframe) HTML() (HTML, error) {
