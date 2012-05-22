@@ -65,7 +65,16 @@ func writeKeyValue(w io.Writer, key string, val interface{}) (int, error) {
 		return 0, nil
 	}
 	var written, i int
-	i, err = fmt.Fprintf(w, ` %s="`, key)
+	i, err = fmt.Fprintf(w, ` %s`, key)
+	written += i
+	if err != nil {
+		return written, err
+	}
+	// bool values are not written, only the key is
+	if reflect.ValueOf(val).Kind() == reflect.Bool {
+		return written, nil
+	}
+	i, err = fmt.Fprintf(w, `="`)
 	written += i
 	if err != nil {
 		return written, err
