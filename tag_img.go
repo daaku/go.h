@@ -9,5 +9,9 @@ type Img struct {
 }
 
 func (t *Img) HTML() (HTML, error) {
-	return &ReflectNode{Tag: "img", Node: t}, nil
+	return &ReflectNode{
+		Tag:         "img",
+		Node:        t,
+		SelfClosing: true,
+	}, nil
 }
