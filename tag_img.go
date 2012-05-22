@@ -5,6 +5,7 @@ type Img struct {
 	Class string `h:"attr"`
 	Style string `h:"attr"`
 	Src   string `h:"attr"`
+	Alt   string `h:"attr"`
 	Inner HTML   `h:"inner"`
 }
 
