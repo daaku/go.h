@@ -1,7 +1,7 @@
 package h_test
 
 import (
-	"github.com/nshah/go.h"
+	"github.com/daaku/go.h"
 	"testing"
 )
 

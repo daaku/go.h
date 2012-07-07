@@ -1,4 +1,4 @@
-go.h [![Build Status](https://secure.travis-ci.org/nshah/go.h.png)](http://travis-ci.org/nshah/go.h)
+go.h [![Build Status](https://secure.travis-ci.org/daaku/go.h.png)](http://travis-ci.org/daaku/go.h)
 ====
 
-Documentation: http://gopkgdoc.appspot.com/pkg/github.com/nshah/go.h
+Documentation: http://gopkgdoc.appspot.com/pkg/github.com/daaku/go.h
