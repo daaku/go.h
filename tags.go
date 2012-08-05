@@ -28,6 +28,7 @@ func (b *Body) HTML() (HTML, error) {
 type Button struct {
 	ID    string `h:"attr"`
 	Class string `h:"attr"`
+	Type  string `h:"attr"`
 	Style string `h:"attr"`
 	Title string `h:"attr"`
 	Inner HTML   `h:"inner"`
