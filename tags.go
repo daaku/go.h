@@ -1,13 +1,14 @@
 package h
 
 type A struct {
-	ID    string                 `h:"attr"`
-	Class string                 `h:"attr"`
-	Style string                 `h:"attr"`
-	Title string                 `h:"attr"`
-	HREF  string                 `h:"attr"`
-	Inner HTML                   `h:"inner"`
-	Data  map[string]interface{} `h:"dict"`
+	ID     string                 `h:"attr"`
+	Class  string                 `h:"attr"`
+	Style  string                 `h:"attr"`
+	Title  string                 `h:"attr"`
+	HREF   string                 `h:"attr"`
+	Target string                 `h:"attr"`
+	Inner  HTML                   `h:"inner"`
+	Data   map[string]interface{} `h:"dict"`
 }
 
 func (a *A) HTML() (HTML, error) {
@@ -26,12 +27,13 @@ func (b *Body) HTML() (HTML, error) {
 }
 
 type Button struct {
-	ID    string `h:"attr"`
-	Class string `h:"attr"`
-	Type  string `h:"attr"`
-	Style string `h:"attr"`
-	Title string `h:"attr"`
-	Inner HTML   `h:"inner"`
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Type  string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Title string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
 }
 
 func (b *Button) HTML() (HTML, error) {
