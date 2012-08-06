@@ -149,6 +149,7 @@ type Input struct {
 	Type        string `h:"attr"`
 	Value       string `h:"attr"`
 	Placeholder string `h:"attr"`
+	Checked     bool   `h:"attr"`
 	Inner       HTML   `h:"inner"`
 }
 
