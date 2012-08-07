@@ -308,10 +308,11 @@ func (t *Table) HTML() (HTML, error) {
 }
 
 type Tr struct {
-	ID    string `h:"attr"`
-	Class string `h:"attr"`
-	Style string `h:"attr"`
-	Inner HTML   `h:"inner"`
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
 }
 
 func (t *Tr) HTML() (HTML, error) {
