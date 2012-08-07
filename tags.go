@@ -7,6 +7,7 @@ type A struct {
 	Title  string                 `h:"attr"`
 	HREF   string                 `h:"attr"`
 	Target string                 `h:"attr"`
+	Rel    string                 `h:"attr"`
 	Inner  HTML                   `h:"inner"`
 	Data   map[string]interface{} `h:"dict"`
 }
