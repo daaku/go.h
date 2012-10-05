@@ -158,15 +158,16 @@ func (t *Img) HTML() (HTML, error) {
 }
 
 type Input struct {
-	ID          string `h:"attr"`
-	Class       string `h:"attr"`
-	Name        string `h:"attr"`
-	Style       string `h:"attr"`
-	Type        string `h:"attr"`
-	Value       string `h:"attr"`
-	Placeholder string `h:"attr"`
-	Checked     bool   `h:"attr"`
-	Inner       HTML   `h:"inner"`
+	ID          string                 `h:"attr"`
+	Class       string                 `h:"attr"`
+	Name        string                 `h:"attr"`
+	Style       string                 `h:"attr"`
+	Type        string                 `h:"attr"`
+	Value       string                 `h:"attr"`
+	Placeholder string                 `h:"attr"`
+	Checked     bool                   `h:"attr"`
+	Data        map[string]interface{} `h:"dict"`
+	Inner       HTML                   `h:"inner"`
 }
 
 func (i *Input) HTML() (HTML, error) {
@@ -251,6 +252,7 @@ func (d *Pre) HTML() (HTML, error) {
 
 type Script struct {
 	Src   string `h:"attr"`
+	Async bool   `h:"attr"`
 	Inner HTML   `h:"inner"`
 }
 
