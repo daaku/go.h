@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 )
 
 type HTML interface {
@@ -52,4 +53,15 @@ func Compile(h HTML) HTML {
 		log.Fatalf("Failed to Compile HTML %v with error %s", h, err)
 	}
 	return Unsafe(m)
+}
+
+// Writes a HTML response and writes errors on failure.
+func WriteResponse(w http.ResponseWriter, r *http.Request, html HTML) {
+	if r.Method != "HEAD" {
+		_, err := Write(w, html)
+		if err != nil {
+			log.Printf("Error writing HTML for URL: %s: %s", r.URL, err)
+			Write(w, String("FATAL ERROR"))
+		}
+	}
 }
