@@ -12,5 +12,5 @@ func (u UnsafeBytes) HTML() (HTML, error) {
 }
 
 func (u UnsafeBytes) Write(w io.Writer) (int, error) {
-	return fmt.Fprint(w, u)
+	return fmt.Fprintf(w, "%s", u)
 }
