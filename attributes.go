@@ -50,7 +50,6 @@ func isZero(i interface{}) (bool, error) {
 		return false, fmt.Errorf(
 			`Could not work with attribute value "%v" with kind %s`, i, value.Kind())
 	}
-	panic("never reached")
 }
 
 // Render a attribute value pair.

@@ -36,7 +36,6 @@ func Write(w io.Writer, h HTML) (int, error) {
 			return 0, fmt.Errorf("Value %+v of unknown type %T", h, h)
 		}
 	}
-	panic("not reached")
 }
 
 // Render HTML as a string.
@@ -57,6 +56,7 @@ func Compile(h HTML) HTML {
 
 // Writes a HTML response and writes errors on failure.
 func WriteResponse(w http.ResponseWriter, r *http.Request, html HTML) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if r.Method != "HEAD" {
 		_, err := Write(w, html)
 		if err != nil {
