@@ -2,11 +2,6 @@ package h
 
 type XMLNS map[string]string
 
-type Document struct {
-	XMLNS XMLNS
-	Inner HTML
-}
-
 func (ns XMLNS) Attributes() Attributes {
 	attrs := Attributes{}
 	for key, val := range ns {
@@ -15,12 +10,23 @@ func (ns XMLNS) Attributes() Attributes {
 	return attrs
 }
 
+type Document struct {
+	XMLNS XMLNS
+	Inner HTML
+	Lang  string
+}
+
 func (d *Document) HTML() (HTML, error) {
+	attrs := d.XMLNS.Attributes()
+	if d.Lang != "" {
+		attrs["lang"] = "en"
+	}
+
 	return &Frag{
 		Unsafe("<!doctype html>"),
 		&Node{
 			Tag:        "html",
-			Attributes: d.XMLNS.Attributes(),
+			Attributes: attrs,
 			Inner:      d.Inner,
 		},
 	}, nil

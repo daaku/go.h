@@ -1,8 +1,9 @@
 package h_test
 
 import (
-	"github.com/daaku/go.h"
 	"testing"
+
+	"github.com/daaku/go.h"
 )
 
 func TestEmptyDocument(t *testing.T) {
@@ -20,4 +21,12 @@ func TestFacebookXMLNS(t *testing.T) {
 	}
 	assertRender(t, doc,
 		`<!doctype html><html xmlns:fb="http://ogp.me/ns/fb#"></html>`)
+}
+
+func TestDocumentLangAttr(t *testing.T) {
+	t.Parallel()
+	doc := &h.Document{
+		Lang: "en",
+	}
+	assertRender(t, doc, `<!doctype html><html lang="en"></html>`)
 }
