@@ -398,3 +398,12 @@ type Ul struct {
 func (ul *Ul) HTML() (HTML, error) {
 	return &ReflectNode{Tag: "ul", Node: ul}, nil
 }
+
+type Style struct {
+	ID    string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (s *Style) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "style", Node: s}, nil
+}
