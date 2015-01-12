@@ -13,11 +13,15 @@ func (ns XMLNS) Attributes() Attributes {
 type Document struct {
 	XMLNS XMLNS
 	Inner HTML
+	ID    string
 	Lang  string
 }
 
 func (d *Document) HTML() (HTML, error) {
 	attrs := d.XMLNS.Attributes()
+	if d.ID != "" {
+		attrs["id"] = d.ID
+	}
 	if d.Lang != "" {
 		attrs["lang"] = "en"
 	}

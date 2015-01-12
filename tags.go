@@ -71,18 +71,41 @@ const (
 )
 
 type Form struct {
-	ID     string `h:"attr"`
-	Class  string `h:"attr"`
-	Style  string `h:"attr"`
-	Action string `h:"attr"`
-	Method string `h:"attr"`
-	Target string `h:"attr"`
-	Title  string `h:"attr"`
-	Inner  HTML   `h:"inner"`
+	ID      string `h:"attr"`
+	Class   string `h:"attr"`
+	Style   string `h:"attr"`
+	Action  string `h:"attr"`
+	Method  string `h:"attr"`
+	EncType string `h:"attr"`
+	Target  string `h:"attr"`
+	Title   string `h:"attr"`
+	Inner   HTML   `h:"inner"`
 }
 
 func (f *Form) HTML() (HTML, error) {
 	return &ReflectNode{Tag: "form", Node: f}, nil
+}
+
+type FieldSet struct {
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (f *FieldSet) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "fieldset", Node: f}, nil
+}
+
+type Legend struct {
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (l *Legend) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "legend", Node: l}, nil
 }
 
 type Head struct {
@@ -166,6 +189,7 @@ type Input struct {
 	Value       string                 `h:"attr"`
 	Placeholder string                 `h:"attr"`
 	Checked     bool                   `h:"attr"`
+	Multiple    bool                   `h:"attr"`
 	Data        map[string]interface{} `h:"dict"`
 	Inner       HTML                   `h:"inner"`
 }
