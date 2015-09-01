@@ -1,12 +1,14 @@
 package h_test
 
 import (
-	"github.com/daaku/go.h"
 	"testing"
+
+	"github.com/daaku/go.h"
+	"golang.org/x/net/context"
 )
 
 func assertRender(t *testing.T, html h.HTML, expected string) {
-	actual, err := h.Render(html)
+	actual, err := h.Render(context.Background(), html)
 	if err != nil {
 		t.Fatalf("Failed to render document %v with error %s", html, err)
 	}
