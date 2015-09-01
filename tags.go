@@ -141,10 +141,14 @@ func (h *H2) HTML() (HTML, error) {
 }
 
 type Iframe struct {
-	ID    string `h:"attr"`
-	Class string `h:"attr"`
-	Style string `h:"attr"`
-	Src   string `h:"attr"`
+	ID              string `h:"attr"`
+	Class           string `h:"attr"`
+	Style           string `h:"attr"`
+	Src             string `h:"attr"`
+	Width           int    `h:"attr"`
+	Height          int    `h:"attr"`
+	FrameBorder     int    `h:"attr"`
+	AllowFullScreen bool   `h:"attr"`
 }
 
 func (t *Iframe) HTML() (HTML, error) {
@@ -430,4 +434,64 @@ type Style struct {
 
 func (s *Style) HTML() (HTML, error) {
 	return &ReflectNode{Tag: "style", Node: s}, nil
+}
+
+type Header struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (d *Header) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "header", Node: d}, nil
+}
+
+type Footer struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (d *Footer) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "footer", Node: d}, nil
+}
+
+type Main struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (d *Main) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "main", Node: d}, nil
+}
+
+type Nav struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (d *Nav) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "nav", Node: d}, nil
+}
+
+type Aside struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (d *Aside) HTML() (HTML, error) {
+	return &ReflectNode{Tag: "aside", Node: d}, nil
 }
