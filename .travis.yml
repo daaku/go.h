@@ -1,3 +1,21 @@
 language: go
+
+go:
+  - 1.4
+  - 1.5
+
+before_install:
+  - go get -v golang.org/x/tools/cmd/vet
+  - go get -v golang.org/x/tools/cmd/cover
+  - go get -v github.com/golang/lint/golint
+
+install:
+  - go install -race -v std
+  - go get -race -t -v ./...
+  - go install -race -v ./...
+
 script:
- - curl https://raw.github.com/daaku/go.travis/master/install | sh
+  - go vet ./...
+  - $HOME/gopath/bin/golint .
+  - go test -cpu=2 -race -v ./...
+  - go test -cpu=2 -covermode=atomic ./...
