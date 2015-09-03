@@ -39,7 +39,7 @@ type Button struct {
 	Inner HTML                   `h:"inner"`
 }
 
-func (b *Button) HTML() (HTML, error) {
+func (b *Button) HTML(ctx context.Context) (HTML, error) {
 	return &ReflectNode{Tag: "button", Node: b}, nil
 }
 
