@@ -2,9 +2,20 @@ package h
 
 import (
 	"errors"
+	"net/url"
 
 	"golang.org/x/net/context"
 )
+
+func HiddenInputs(values url.Values) HTML {
+	frag := &Frag{}
+	for key, list := range values {
+		for _, each := range list {
+			frag.Append(&Input{Name: key, Value: each})
+		}
+	}
+	return &Div{Style: "display:none", Inner: frag}
+}
 
 var _ HTML = (*LinkStyle)(nil)
 
