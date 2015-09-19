@@ -18,7 +18,7 @@ type Frag []HTML
 
 // HTML renders the content.
 func (f *Frag) HTML(ctx context.Context) (HTML, error) {
-	return f, fmt.Errorf("Frag.HTML called for %s", f)
+	return f, fmt.Errorf("Frag.HTML called for %v", f)
 }
 
 // Append appends some HTML to the Fragment.
