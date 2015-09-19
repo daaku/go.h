@@ -7,6 +7,9 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = Unsafe("")
+var _ Primitive = Unsafe("")
+
 type Unsafe string
 
 func (u Unsafe) HTML(ctx context.Context) (HTML, error) {

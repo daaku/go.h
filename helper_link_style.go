@@ -6,6 +6,8 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = (*LinkStyle)(nil)
+
 type LinkStyle struct {
 	HREF string
 }

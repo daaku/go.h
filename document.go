@@ -12,6 +12,8 @@ func (ns XMLNS) Attributes() Attributes {
 	return attrs
 }
 
+var _ HTML = (*Document)(nil)
+
 type Document struct {
 	XMLNS XMLNS
 	Inner HTML

@@ -6,6 +6,8 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = String("")
+
 type String string
 
 func (s String) HTML(ctx context.Context) (HTML, error) {

@@ -7,6 +7,9 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = UnsafeBytes(nil)
+var _ Primitive = UnsafeBytes(nil)
+
 type UnsafeBytes []byte
 
 func (u UnsafeBytes) HTML(ctx context.Context) (HTML, error) {

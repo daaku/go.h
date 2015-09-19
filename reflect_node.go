@@ -9,6 +9,9 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = (*ReflectNode)(nil)
+var _ Primitive = (*ReflectNode)(nil)
+
 type ReflectNode struct {
 	Tag         string
 	Node        interface{}

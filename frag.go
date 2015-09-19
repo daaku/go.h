@@ -7,6 +7,9 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = (*Frag)(nil)
+var _ Primitive = (*Frag)(nil)
+
 type Frag []HTML
 
 func (f *Frag) HTML(ctx context.Context) (HTML, error) {

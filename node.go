@@ -7,6 +7,9 @@ import (
 	"golang.org/x/net/context"
 )
 
+var _ HTML = (*Node)(nil)
+var _ Primitive = (*Node)(nil)
+
 type Node struct {
 	Tag         string
 	Attributes  Attributes
