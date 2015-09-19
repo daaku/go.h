@@ -39,13 +39,10 @@ func Write(ctx context.Context, w io.Writer, h HTML) (int, error) {
 			return 0, nil
 		case Primitive:
 			return t.Write(ctx, w)
-		case HTML:
-			h, err = h.HTML(ctx)
-			if err != nil {
-				return 0, err
-			}
-		default:
-			return 0, fmt.Errorf("Value %+v of unknown type %T", h, h)
+		}
+		h, err = h.HTML(ctx)
+		if err != nil {
+			return 0, err
 		}
 	}
 }
