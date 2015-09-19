@@ -84,7 +84,7 @@ func (u UnsafeBytes) HTML(ctx context.Context) (HTML, error) {
 }
 
 func (u UnsafeBytes) Write(ctx context.Context, w io.Writer) (int, error) {
-	return fmt.Fprintf(w, "%s", u)
+	return w.Write([]byte(u))
 }
 
 var _ HTML = (*Node)(nil)

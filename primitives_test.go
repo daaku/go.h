@@ -25,3 +25,10 @@ func TestPrimitivesHTML(t *testing.T) {
 		ensure.Nil(t, v)
 	}
 }
+
+func TestUnsafeBytes(t *testing.T) {
+	raw := []byte("<foo></bar>")
+	s, err := Render(context.Background(), UnsafeBytes(raw))
+	ensure.Nil(t, err)
+	ensure.DeepEqual(t, s, string(raw))
+}
