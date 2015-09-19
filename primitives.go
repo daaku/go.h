@@ -10,6 +10,10 @@ import (
 	"golang.org/x/net/context"
 )
 
+func errHTMLOnPrimitive(name string) error {
+	return fmt.Errorf("h: HTML called on Primitive %q", name)
+}
+
 var _ HTML = (*Frag)(nil)
 var _ Primitive = (*Frag)(nil)
 
@@ -18,7 +22,7 @@ type Frag []HTML
 
 // HTML renders the content.
 func (f *Frag) HTML(ctx context.Context) (HTML, error) {
-	return f, fmt.Errorf("Frag.HTML called for %v", f)
+	return nil, errHTMLOnPrimitive("Frag")
 }
 
 // Append appends some HTML to the Fragment.
@@ -59,7 +63,7 @@ type Unsafe string
 
 // HTML renders the content.
 func (u Unsafe) HTML(ctx context.Context) (HTML, error) {
-	return u, fmt.Errorf("Unsafe.HTML called for %s", u)
+	return nil, errHTMLOnPrimitive("Unsafe")
 }
 
 func (u Unsafe) Write(ctx context.Context, w io.Writer) (int, error) {
@@ -76,7 +80,7 @@ type UnsafeBytes []byte
 
 // HTML renders the content.
 func (u UnsafeBytes) HTML(ctx context.Context) (HTML, error) {
-	return u, fmt.Errorf("UnsafeBytes.HTML called for %s", u)
+	return nil, errHTMLOnPrimitive("UnsafeBytes")
 }
 
 func (u UnsafeBytes) Write(ctx context.Context, w io.Writer) (int, error) {
@@ -96,7 +100,7 @@ type Node struct {
 
 // HTML renders the content.
 func (n *Node) HTML(ctx context.Context) (HTML, error) {
-	return n, fmt.Errorf("Called HTML for Node: %+v", n)
+	return nil, errHTMLOnPrimitive("Node")
 }
 
 // Write the generated markup for a Node.
@@ -152,7 +156,7 @@ type ReflectNode struct {
 
 // HTML renders the content.
 func (n *ReflectNode) HTML(ctx context.Context) (HTML, error) {
-	return n, fmt.Errorf("Called HTML for ReflectNode: %+v", n)
+	return nil, errHTMLOnPrimitive("ReflectNode")
 }
 
 // Write the generated markup for a ReflectNode.
