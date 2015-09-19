@@ -6,7 +6,6 @@ go:
 before_install:
   - go get -v golang.org/x/tools/cmd/vet
   - go get -v golang.org/x/tools/cmd/cover
-  - go get -v github.com/golang/lint/golint
 
 install:
   - go install -race -v std
@@ -15,6 +14,5 @@ install:
 
 script:
   - go vet ./...
-  - $HOME/gopath/bin/golint .
   - go test -cpu=2 -race -v ./...
   - go test -cpu=2 -covermode=atomic ./...
