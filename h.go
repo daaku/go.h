@@ -3,6 +3,10 @@
 // arguably simple and idiomatic Go library to generate HTML for the purposes
 // of rendering in web browsers.
 //
+// This approach though verbose allows for building powerful abstracitons with
+// simple looking APIs. Look at
+// https://godoc.org/github.com/daaku/go.h?importers for some examples.
+//
 // **Unstable API. Work in progress.**
 package h
 
