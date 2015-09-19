@@ -7,6 +7,8 @@ import (
 	"golang.org/x/net/context"
 )
 
+var errLinkStyleMissingHREF = errors.New("h: LinkStyle missing HREF")
+
 // HiddenInputs renders some HTML for the given url.Values. It does so inside a
 // div with display: none.
 func HiddenInputs(values url.Values) HTML {
@@ -29,7 +31,7 @@ type LinkStyle struct {
 // HTML renders the tag.
 func (l *LinkStyle) HTML(ctx context.Context) (HTML, error) {
 	if l.HREF == "" {
-		return nil, errors.New("Missing HREF in LinkStyle.")
+		return nil, errLinkStyleMissingHREF
 	}
 	return &Link{
 		Type: "text/css",
