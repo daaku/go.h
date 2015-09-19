@@ -142,6 +142,54 @@ func (h *H2) HTML(ctx context.Context) (HTML, error) {
 	return &ReflectNode{Tag: "h2", Node: h}, nil
 }
 
+type H3 struct {
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Title string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (h *H3) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "h3", Node: h}, nil
+}
+
+type H4 struct {
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Title string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (h *H4) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "h4", Node: h}, nil
+}
+
+type H5 struct {
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Title string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (h *H5) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "h5", Node: h}, nil
+}
+
+type H6 struct {
+	ID    string `h:"attr"`
+	Class string `h:"attr"`
+	Style string `h:"attr"`
+	Title string `h:"attr"`
+	Inner HTML   `h:"inner"`
+}
+
+func (h *H6) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "h6", Node: h}, nil
+}
+
 type Iframe struct {
 	ID              string `h:"attr"`
 	Class           string `h:"attr"`
@@ -170,12 +218,13 @@ func (i *I) HTML(ctx context.Context) (HTML, error) {
 }
 
 type Img struct {
-	ID    string `h:"attr"`
-	Class string `h:"attr"`
-	Style string `h:"attr"`
-	Src   string `h:"attr"`
-	Alt   string `h:"attr"`
-	Inner HTML   `h:"inner"`
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Src   string                 `h:"attr"`
+	Alt   string                 `h:"attr"`
+	Inner HTML                   `h:"inner"`
+	Data  map[string]interface{} `h:"dict"`
 }
 
 func (t *Img) HTML(ctx context.Context) (HTML, error) {
@@ -496,4 +545,40 @@ type Aside struct {
 
 func (d *Aside) HTML(ctx context.Context) (HTML, error) {
 	return &ReflectNode{Tag: "aside", Node: d}, nil
+}
+
+type Small struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (d *Small) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "small", Node: d}, nil
+}
+
+type Figure struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (p *Figure) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "figure", Node: p}, nil
+}
+
+type FigCaption struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+func (p *FigCaption) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "figcaption", Node: p}, nil
 }
