@@ -13,12 +13,15 @@ import (
 var _ HTML = (*Frag)(nil)
 var _ Primitive = (*Frag)(nil)
 
+// Frag is a Primitive that renders a slice of HTML.
 type Frag []HTML
 
+// HTML renders the content.
 func (f *Frag) HTML(ctx context.Context) (HTML, error) {
 	return f, fmt.Errorf("Frag.HTML called for %s", f)
 }
 
+// Append appends some HTML to the Fragment.
 func (f *Frag) Append(h HTML) {
 	*f = append(*f, h)
 }
@@ -37,8 +40,11 @@ func (f *Frag) Write(ctx context.Context, w io.Writer) (int, error) {
 
 var _ HTML = String("")
 
+// String is a Primitive that renders a string of text. The contents are
+// encoded using html.EscapeString.
 type String string
 
+// HTML renders the content.
 func (s String) HTML(ctx context.Context) (HTML, error) {
 	return Unsafe(html.EscapeString(string(s))), nil
 }
@@ -46,8 +52,12 @@ func (s String) HTML(ctx context.Context) (HTML, error) {
 var _ HTML = Unsafe("")
 var _ Primitive = Unsafe("")
 
+// Unsafe is a Primitive that renders a string of HTML. The contents are
+// NOT encoded and allows for HTML to be included as is. You should not use
+// this to render user generated content.
 type Unsafe string
 
+// HTML renders the content.
 func (u Unsafe) HTML(ctx context.Context) (HTML, error) {
 	return u, fmt.Errorf("Unsafe.HTML called for %s", u)
 }
@@ -59,8 +69,12 @@ func (u Unsafe) Write(ctx context.Context, w io.Writer) (int, error) {
 var _ HTML = UnsafeBytes(nil)
 var _ Primitive = UnsafeBytes(nil)
 
+// UnsafeBytes is a Primitive that renders bytes of HTML. The contents are NOT
+// encoded and allows for HTML to be included as is. You should not use this to
+// render user generated content.
 type UnsafeBytes []byte
 
+// HTML renders the content.
 func (u UnsafeBytes) HTML(ctx context.Context) (HTML, error) {
 	return u, fmt.Errorf("UnsafeBytes.HTML called for %s", u)
 }
@@ -72,6 +86,7 @@ func (u UnsafeBytes) Write(ctx context.Context, w io.Writer) (int, error) {
 var _ HTML = (*Node)(nil)
 var _ Primitive = (*Node)(nil)
 
+// Node is a primitive to generate a HTML node with the given configuration.
 type Node struct {
 	Tag         string
 	Attributes  Attributes
@@ -79,6 +94,7 @@ type Node struct {
 	SelfClosing bool
 }
 
+// HTML renders the content.
 func (n *Node) HTML(ctx context.Context) (HTML, error) {
 	return n, fmt.Errorf("Called HTML for Node: %+v", n)
 }
@@ -127,12 +143,14 @@ func (n *Node) Write(ctx context.Context, w io.Writer) (int, error) {
 var _ HTML = (*ReflectNode)(nil)
 var _ Primitive = (*ReflectNode)(nil)
 
+// ReflectNode uses reflection to generate a HTML from a struct.
 type ReflectNode struct {
 	Tag         string
 	Node        interface{}
 	SelfClosing bool
 }
 
+// HTML renders the content.
 func (n *ReflectNode) HTML(ctx context.Context) (HTML, error) {
 	return n, fmt.Errorf("Called HTML for ReflectNode: %+v", n)
 }

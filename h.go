@@ -1,4 +1,8 @@
-// Package provides a psuedo-DOM style approach to generating HTML markup.
+// Package h provides a HTML generation abstraction for Go. It does so by
+// allowing you to write some verbose and often annoying looking but extremely
+// arguably simple and idiomatic Go library to generate HTML for the purposes
+// of rendering in web browsers.
+//
 // **Unstable API. Work in progress.**
 package h
 
@@ -14,10 +18,14 @@ import (
 	"golang.org/x/net/context"
 )
 
+// HTML that renders HTML. HTML is a recursive type which is eventually made
+// up of Primitives.
 type HTML interface {
 	HTML(context.Context) (HTML, error)
 }
 
+// Primitive generates HTML. They are terminal, as opposed to recursive like
+// HTML. Primitive types satisfy HTML, but it is an error to use them as such.
 type Primitive interface {
 	Write(context.Context, io.Writer) (int, error)
 }
@@ -58,6 +66,8 @@ func Compile(ctx context.Context, h HTML) HTML {
 	return Unsafe(m)
 }
 
+// Attributes are automatically rendered and automatically render most
+// primitive types.
 type Attributes map[string]interface{}
 
 // Render an attribute value.
