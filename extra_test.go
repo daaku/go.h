@@ -23,8 +23,8 @@ func TestHiddenInputs(t *testing.T) {
 	}
 	d := HiddenInputs(v).(*Div)
 	ensure.DeepEqual(t, d.Style, "display:none")
-	f := d.Inner.(*Frag)
-	ensure.SameElements(t, *f, Frag{
+	f := d.Inner.(Frag)
+	ensure.SameElements(t, f, Frag{
 		&Input{Name: k1, Value: v1a},
 		&Input{Name: k1, Value: v1b},
 		&Input{Name: k2, Value: v2},
