@@ -811,3 +811,32 @@ type FigCaption struct {
 func (p *FigCaption) HTML(ctx context.Context) (HTML, error) {
 	return &ReflectNode{Tag: "figcaption", Node: p}, nil
 }
+
+var _ HTML = (*Address)(nil)
+
+// Address renders a HTML <address> tag.
+type Address struct {
+	ID    string                 `h:"attr"`
+	Class string                 `h:"attr"`
+	Style string                 `h:"attr"`
+	Data  map[string]interface{} `h:"dict"`
+	Inner HTML                   `h:"inner"`
+}
+
+// HTML renders the content.
+func (p *Address) HTML(ctx context.Context) (HTML, error) {
+	return &ReflectNode{Tag: "address", Node: p}, nil
+}
+
+var _ HTML = (*Br)(nil)
+
+// Br renders a HTML <br> tag.
+type Br struct{}
+
+// HTML renders the content.
+func (p *Br) HTML(ctx context.Context) (HTML, error) {
+	return &Node{
+		Tag:         "br",
+		SelfClosing: true,
+	}, nil
+}
