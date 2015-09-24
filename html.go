@@ -575,6 +575,7 @@ type Th struct {
 	ID    string `h:"attr"`
 	Class string `h:"attr"`
 	Style string `h:"attr"`
+	Scope string `h:"attr"`
 	Inner HTML   `h:"inner"`
 }
 
