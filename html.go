@@ -360,6 +360,7 @@ type Input struct {
 	Style       string                 `h:"attr"`
 	Type        string                 `h:"attr"`
 	Value       string                 `h:"attr"`
+	Src         string                 `h:"attr"`
 	Placeholder string                 `h:"attr"`
 	Checked     bool                   `h:"attr"`
 	Multiple    bool                   `h:"attr"`
