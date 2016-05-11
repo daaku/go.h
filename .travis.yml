@@ -2,10 +2,9 @@ sudo: false
 language: go
 
 go:
-  - 1.5.1
+  - tip
 
 before_install:
-  - go get -v golang.org/x/tools/cmd/vet
   - go get -v golang.org/x/tools/cmd/cover
 
 install:

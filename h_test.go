@@ -1,10 +1,10 @@
 package h_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/daaku/go.h"
-	"golang.org/x/net/context"
 )
 
 func assertRender(t *testing.T, html h.HTML, expected string) {

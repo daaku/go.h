@@ -1,6 +1,6 @@
 package h
 
-import "golang.org/x/net/context"
+import "context"
 
 // XMLNS auto prefixes each attribute key with "xmlns:" in the output.
 type XMLNS map[string]string
